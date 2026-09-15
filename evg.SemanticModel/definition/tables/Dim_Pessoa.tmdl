@@ -1,0 +1,77 @@
+table Dim_Pessoa
+	lineageTag: d063c35f-19ac-44cb-a37d-2cb91c27d15a
+
+	column telefone_pessoa
+		dataType: string
+		lineageTag: 02310e59-adeb-436b-83f9-d321c7d1ce0e
+		summarizeBy: none
+		sourceColumn: telefone_pessoa
+
+		annotation SummarizationSetBy = Automatic
+
+	column email_pessoa
+		dataType: string
+		lineageTag: f84d9ca6-54f8-4504-8714-50b2909149a1
+		summarizeBy: none
+		sourceColumn: email_pessoa
+
+		annotation SummarizationSetBy = Automatic
+
+	column idade
+		dataType: string
+		lineageTag: e416d080-445e-4b6d-8c18-86b7481d3d5f
+		summarizeBy: none
+		sourceColumn: idade
+
+		annotation SummarizationSetBy = Automatic
+
+	column sexo
+		dataType: string
+		lineageTag: 81978e0d-4e4c-4dca-a2c0-48b009a60c8b
+		summarizeBy: none
+		sourceColumn: sexo
+
+		annotation SummarizationSetBy = Automatic
+
+	column codigo_pessoa
+		dataType: string
+		lineageTag: 4e31b409-e778-4dd6-8884-4cec6e14a1b2
+		summarizeBy: none
+		sourceColumn: codigo_pessoa
+
+		annotation SummarizationSetBy = Automatic
+
+	column instituicao
+		dataType: string
+		lineageTag: 5b9ee4e3-2fe4-4a54-8090-108f36ea1ab8
+		summarizeBy: none
+		sourceColumn: instituicao
+
+		annotation SummarizationSetBy = Automatic
+
+	column nacionalidade
+		dataType: string
+		lineageTag: 1c9e14f2-008b-44a7-b69e-d7fd7546ba08
+		summarizeBy: none
+		sourceColumn: nacionalidade
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Pessoa = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\renata.teixeira\Downloads\amostra_evg.csv"),[Delimiter=",", Columns=25, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"dt_matricula", type datetime}, {"dt_fim", type datetime}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"dt_fim", type date}, {"dt_matricula", type date}}),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Tipo Alterado1",{"municipio_pessoa", "uf_pessoa", "telefone_pessoa", "email_pessoa", "esfera", "poder", "idade", "sexo", "codigo_pessoa", "instituicao", "nacionalidade"}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Outras Colunas Removidas", {"codigo_pessoa"}),
+				    #"Colunas Removidas" = Table.RemoveColumns(#"Duplicatas Removidas",{"municipio_pessoa", "uf_pessoa", "poder", "esfera"})
+				in
+				    #"Colunas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

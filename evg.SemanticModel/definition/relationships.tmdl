@@ -1,0 +1,57 @@
+relationship 44123f70-e893-43b6-868e-4ada537e644f
+	joinOnDateBehavior: datePartOnly
+	fromColumn: amostra_evg.dt_fim
+	toColumn: LocalDateTable_c3ea1774-cf39-4fb8-933c-e564d9930af2.Date
+
+relationship e7a7c222-4f60-411d-863b-70ad35cb67de
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dcalendar.data
+	toColumn: LocalDateTable_d394bc4b-f987-4dfb-85e9-625d180bebc4.Date
+
+relationship 627db2b3-37b2-d484-4a45-7397ce2dc1c3
+	fromColumn: amostra_evg.dt_matricula
+	toColumn: Dcalendar.data
+
+relationship 0db9acbe-cef2-4edb-ae11-676e2acd3d0c
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Fato_Matriculas.dt_matricula
+	toColumn: LocalDateTable_40262afd-1695-4ee1-b31e-d737f93078ad.Date
+
+relationship dbb95960-78a0-4956-867d-38975f9e94a7
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Dim_Turma.dt_fim
+	toColumn: LocalDateTable_fc7bfd4e-58f7-4582-8336-171ca6bbe73c.Date
+
+relationship AutoDetected_7f76ff6d-bf27-4536-b054-f8edddd2019d
+	crossFilteringBehavior: bothDirections
+	fromCardinality: one
+	fromColumn: Fato_Matriculas.cod_matricula
+	toColumn: amostra_evg.cod_matricula
+
+relationship AutoDetected_9937c1a6-8de3-4832-88ee-c1219ee245c6
+	fromColumn: amostra_evg.cod_turma
+	toColumn: Dim_Turma.cod_turma
+
+relationship AutoDetected_bb1e7857-1890-41bf-bd18-d52bdcc04ebb
+	isActive: false
+	fromColumn: Fato_Matriculas.cod_turma
+	toColumn: Dim_Turma.cod_turma
+
+relationship AutoDetected_fe8c89b6-401b-4c38-845b-64e0930e750d
+	fromColumn: amostra_evg.cod_curso
+	toColumn: Dim_Curso.cod_curso
+
+relationship AutoDetected_e05c725a-4444-464d-bdf5-52186a5cb327
+	isActive: false
+	fromColumn: Fato_Matriculas.cod_curso
+	toColumn: Dim_Curso.cod_curso
+
+relationship AutoDetected_307d5668-0fd4-4acd-8a22-822f5d085064
+	fromColumn: amostra_evg.codigo_pessoa
+	toColumn: Dim_Pessoa.codigo_pessoa
+
+relationship AutoDetected_f811c952-2b84-4c71-9b67-2a702198416e
+	isActive: false
+	fromColumn: Fato_Matriculas.codigo_pessoa
+	toColumn: Dim_Pessoa.codigo_pessoa
+

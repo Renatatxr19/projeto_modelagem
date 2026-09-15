@@ -1,0 +1,30 @@
+model Model
+	culture: pt-BR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: pt-BR
+	valueFilterBehavior: independent
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["amostra_evg","Dcalendar","Fato_Matriculas","Dim_Curso","Dim_Turma","Dim_Pessoa","Dim_localidade"]
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table amostra_evg
+ref table DateTableTemplate_4266fa30-b551-4570-922a-a758ad1363cb
+ref table LocalDateTable_c3ea1774-cf39-4fb8-933c-e564d9930af2
+ref table Dcalendar
+ref table LocalDateTable_d394bc4b-f987-4dfb-85e9-625d180bebc4
+ref table Fato_Matriculas
+ref table LocalDateTable_40262afd-1695-4ee1-b31e-d737f93078ad
+ref table Dim_Curso
+ref table Dim_Turma
+ref table LocalDateTable_fc7bfd4e-58f7-4582-8336-171ca6bbe73c
+ref table Dim_Pessoa
+ref table Dim_localidade
+
+ref cultureInfo pt-BR
+

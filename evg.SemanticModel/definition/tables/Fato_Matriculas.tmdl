@@ -1,0 +1,75 @@
+table Fato_Matriculas
+	lineageTag: 7d4ff885-75a4-472d-9ae3-f6fed5598f22
+
+	column cod_matricula
+		dataType: string
+		lineageTag: 28d5bde8-1d0f-47ba-b2d1-6c54f5bea119
+		summarizeBy: none
+		sourceColumn: cod_matricula
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_matricula
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: bedbacaf-24bf-4237-bf75-bf044b598a98
+		summarizeBy: none
+		sourceColumn: dt_matricula
+
+		variation Variation
+			isDefault
+			relationship: 0db9acbe-cef2-4edb-ae11-676e2acd3d0c
+			defaultHierarchy: LocalDateTable_40262afd-1695-4ee1-b31e-d737f93078ad.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column codigo_pessoa
+		dataType: string
+		lineageTag: 532e8184-e132-4836-aab4-8cc0db1e4a14
+		summarizeBy: none
+		sourceColumn: codigo_pessoa
+
+		annotation SummarizationSetBy = Automatic
+
+	column cod_curso
+		dataType: string
+		lineageTag: 2d3b05ae-dd3a-4609-8030-dc63b2581b4c
+		summarizeBy: none
+		sourceColumn: cod_curso
+
+		annotation SummarizationSetBy = Automatic
+
+	column cod_turma
+		dataType: string
+		lineageTag: 2b6d2f60-62fd-452c-9e6d-b0a06607183f
+		summarizeBy: none
+		sourceColumn: cod_turma
+
+		annotation SummarizationSetBy = Automatic
+
+	column sit_matricula
+		dataType: string
+		lineageTag: 50c65124-9435-442b-8766-63d133096d2f
+		summarizeBy: none
+		sourceColumn: sit_matricula
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Fato_Matriculas = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\renata.teixeira\Downloads\amostra_evg.csv"),[Delimiter=",", Columns=25, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"dt_matricula", type datetime}, {"dt_fim", type datetime}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"dt_fim", type date}, {"dt_matricula", type date}}),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Tipo Alterado1",{"cod_matricula", "dt_matricula", "codigo_pessoa", "cod_curso", "cod_turma", "sit_matricula"})
+				in
+				    #"Outras Colunas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

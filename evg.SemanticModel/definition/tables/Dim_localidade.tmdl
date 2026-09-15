@@ -1,0 +1,35 @@
+table Dim_localidade
+	lineageTag: b556f192-6cac-4d6a-9a43-7d9e8828942b
+
+	column municipio_pessoa
+		dataType: string
+		lineageTag: 256651e4-7e5a-41ab-82d0-0c959530682f
+		summarizeBy: none
+		sourceColumn: municipio_pessoa
+
+		annotation SummarizationSetBy = Automatic
+
+	column uf_pessoa
+		dataType: string
+		lineageTag: 36f849c5-74d7-4625-a8bb-54a2126ed738
+		summarizeBy: none
+		sourceColumn: uf_pessoa
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_localidade = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\renata.teixeira\Downloads\amostra_evg.csv"),[Delimiter=",", Columns=25, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"dt_matricula", type datetime}, {"dt_fim", type datetime}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"dt_fim", type date}, {"dt_matricula", type date}}),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Tipo Alterado1",{"municipio_pessoa", "uf_pessoa"})
+				in
+				    #"Outras Colunas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

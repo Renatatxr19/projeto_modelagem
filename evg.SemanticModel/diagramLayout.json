@@ -1,0 +1,110 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 238.04994569650103,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 858.049945696501,
+            "y": 218.34780186021669
+          },
+          "nodeIndex": "amostra_evg",
+          "nodeLineageTag": "da30a89d-ef65-4406-b681-4d1bce36cdf1",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1321.049945696501,
+            "y": 239.34780186021669
+          },
+          "nodeIndex": "Dcalendar",
+          "nodeLineageTag": "c8aa84dd-ba9c-40e4-82a9-fc9dbf084e66",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 624.04994569650114,
+            "y": 462.69560372043338
+          },
+          "nodeIndex": "Dim_Curso",
+          "nodeLineageTag": "438d323e-5839-446a-9421-fa74c2606434",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": 263.835721017807
+          },
+          "nodeIndex": "Dim_Pessoa",
+          "nodeLineageTag": "d063c35f-19ac-44cb-a37d-2cb91c27d15a",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 643.62457561932683,
+            "y": 0
+          },
+          "nodeIndex": "Dim_Turma",
+          "nodeLineageTag": "2ccf7665-cb3f-42c6-aafc-dd05814490b6",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 257.051487587923,
+            "y": 0
+          },
+          "nodeIndex": "Fato_Matriculas",
+          "nodeLineageTag": "7d4ff885-75a4-472d-9ae3-f6fed5598f22",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "Dim_localidade",
+          "nodeLineageTag": "b556f192-6cac-4d6a-9a43-7d9e8828942b",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Todas as tabelas",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Todas as tabelas",
+  "defaultDiagram": "Todas as tabelas"
+}

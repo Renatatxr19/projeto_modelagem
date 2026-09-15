@@ -1,0 +1,68 @@
+table Dim_Curso
+	lineageTag: 438d323e-5839-446a-9421-fa74c2606434
+
+	column cod_curso
+		dataType: string
+		lineageTag: 710af129-eb0c-4d07-8c28-3637a32dc6a4
+		summarizeBy: none
+		sourceColumn: cod_curso
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_curso
+		dataType: string
+		lineageTag: 5519be02-6def-4964-95dc-9a480091b9e5
+		summarizeBy: none
+		sourceColumn: nome_curso
+
+		annotation SummarizationSetBy = Automatic
+
+	column carga_horaria
+		dataType: string
+		lineageTag: 7ad49b91-ce2f-48e0-a2f1-d81272e684e8
+		summarizeBy: none
+		sourceColumn: carga_horaria
+
+		annotation SummarizationSetBy = Automatic
+
+	column conteudista
+		dataType: string
+		lineageTag: 0442f51c-acb5-44ad-aa83-1b9afff10e4a
+		summarizeBy: none
+		sourceColumn: conteudista
+
+		annotation SummarizationSetBy = Automatic
+
+	column tematica
+		dataType: string
+		lineageTag: 98a356e7-f778-462e-a6e4-eaa90daf0554
+		summarizeBy: none
+		sourceColumn: tematica
+
+		annotation SummarizationSetBy = Automatic
+
+	column email_conteudista
+		dataType: string
+		lineageTag: 14931379-93a2-4783-811d-2d45b0f06b87
+		summarizeBy: none
+		sourceColumn: email_conteudista
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Curso = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\renata.teixeira\Downloads\amostra_evg.csv"),[Delimiter=",", Columns=25, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"dt_matricula", type datetime}, {"dt_fim", type datetime}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"dt_fim", type date}, {"dt_matricula", type date}}),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Tipo Alterado1",{"cod_curso", "nome_curso", "carga_horaria", "conteudista", "tematica", "email_conteudista"}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Outras Colunas Removidas", {"cod_curso"})
+				in
+				    #"Duplicatas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+

@@ -1,0 +1,11 @@
+**/.pbi/localSettings.json
+**/.pbi/cache.abf
+
+# Dados sensíveis / grandes
+*.csv
+*.abf
+.abf/
+
+# Power BI
+.pbi/cache.abf
+*.pbix.bak

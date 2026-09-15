@@ -1,0 +1,68 @@
+table Dim_Turma
+	lineageTag: 2ccf7665-cb3f-42c6-aafc-dd05814490b6
+
+	column cod_turma
+		dataType: string
+		lineageTag: a24ba538-5d3e-4d5b-a179-cd0ecca3abb5
+		summarizeBy: none
+		sourceColumn: cod_turma
+
+		annotation SummarizationSetBy = Automatic
+
+	column nome_turma
+		dataType: string
+		lineageTag: e731bbce-5622-4c94-b882-beb5cab1a880
+		summarizeBy: none
+		sourceColumn: nome_turma
+
+		annotation SummarizationSetBy = Automatic
+
+	column modalidade_turma
+		dataType: string
+		lineageTag: c013ceb1-026c-4571-8ba5-440c0edaca93
+		summarizeBy: none
+		sourceColumn: modalidade_turma
+
+		annotation SummarizationSetBy = Automatic
+
+	column dt_fim
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 143fa67e-cda2-4515-8101-0a7abab20172
+		summarizeBy: none
+		sourceColumn: dt_fim
+
+		variation Variation
+			isDefault
+			relationship: dbb95960-78a0-4956-867d-38975f9e94a7
+			defaultHierarchy: LocalDateTable_fc7bfd4e-58f7-4582-8336-171ca6bbe73c.'Hierarquia de datas'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column sit_turma
+		dataType: string
+		lineageTag: 38fae8ee-a616-4983-834c-d225655528ba
+		summarizeBy: none
+		sourceColumn: sit_turma
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Dim_Turma = m
+		mode: import
+		source =
+				let
+				    Fonte = Csv.Document(File.Contents("C:\Users\renata.teixeira\Downloads\amostra_evg.csv"),[Delimiter=",", Columns=25, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"Cabeçalhos Promovidos" = Table.PromoteHeaders(Fonte, [PromoteAllScalars=true]),
+				    #"Tipo Alterado" = Table.TransformColumnTypes(#"Cabeçalhos Promovidos",{{"dt_matricula", type datetime}, {"dt_fim", type datetime}}),
+				    #"Tipo Alterado1" = Table.TransformColumnTypes(#"Tipo Alterado",{{"dt_fim", type date}, {"dt_matricula", type date}}),
+				    #"Outras Colunas Removidas" = Table.SelectColumns(#"Tipo Alterado1",{"cod_turma", "nome_turma", "modalidade_turma", "dt_fim", "sit_turma"}),
+				    #"Duplicatas Removidas" = Table.Distinct(#"Outras Colunas Removidas", {"cod_turma"})
+				in
+				    #"Duplicatas Removidas"
+
+	annotation PBI_NavigationStepName = Navegação
+
+	annotation PBI_ResultType = Table
+
