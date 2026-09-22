@@ -7,7 +7,8 @@
 ## 2. Perguntas de Negócio
 1. Qual o total de matrículas por curso? 
 2. Como se distribuem os alunos por região/localidade?
-3. (<img width="1445" height="813" alt="Tabela" src="https://github.com/user-attachments/assets/35026f5d-c02c-46d1-b08b-7955c16d3c7c" />
+3.
+(<img width="1445" height="813" alt="Tabela" src="https://github.com/user-attachments/assets/35026f5d-c02c-46d1-b08b-7955c16d3c7c" />
 )
 
 ## 3. Painel de Visualização (Power BI)
